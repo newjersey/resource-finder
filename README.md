@@ -1,4 +1,36 @@
-# Getting Started with Create React App
+# Finder
+
+A front-end ZIP code-based search tool for resources stored in Airtable, e.g. food pantries, vaccination clinics, etc.
+
+## Usage
+
+Configure this application by building a URL to use in an `iframe` embed. The URL `path` (the subdirectories) specific the Airtable base, table, and view. The URL `parameters` customize the functionality of the search interface.
+
+### Initial set up
+
+- Set up table and view in Airtable. The view may be filtered to the records you want to share publicly. For now, keep views < 500 records for sake of performance.
+  - Note: while you can hide fields in Airtable, all fields are sent to a user's browser, so don't put anything sensitive in any field on a table that will be shared publicly. There's a parameter for choosing which fields are displayed publicly, but even fields not displayed are discoverable in the API response
+- The table should have at least the following fields
+  - `locationField` a field containing a ZIP code or a full address with a ZIP at the end of it. By default, the application will look for a field named `ZIP` for this, but you may specify any other field name by setting the `locationField` URL parameter
+  - `nameField` a field containing the resource's name, to be shown as a header on the resource's card. Defaults to field `Name`, may be specified through the `nameField` param
+  - `countyField` a field containing a county name, which is used to enable the County filter. For now, this is required, and values should be one of the NJ county names (e.g. "Cape May", not "Cape May County"). Defaults to `County`, may be specified
+  - `linkField` (optional) a fully qualified URL (e.g. https://example.com/path). If present, this will show up as a button that says "Visit site" on the resource card. Defaults to `Link` field; specify through param
+- Share the table / view with "read only access" with the user "dave.cole@oit.nj.gov (READ ONLY API)", to allow for public access to the view
+- Build an embed URL starting with the URL base `https://innovation.nj.gov/app/finder/`, followed by the Airtable path (copied from the path of the URL when you're looking at the view you want to share in Airtable), e.g. `appzXNd4ovBNZ0ZJb/tblsy2WZggzW1rwD8/viw9MPuhzMteXxi3U`, followed optionally by a `?` and any parameters you want to specify (params should be in the format of `?key=value&key2=value2&key3=value3`), e.g. `?locationField=Address&linkField=Link`
+- Use this URL as the `src` of an `iframe` tag to embed it on a webpage
+
+### Sample embed code
+
+```html
+<script src="https://beta.nj.gov/global-signup/form/vendor/iframeResizer.min.js"></script>
+<iframe
+  onload="iFrameResize({}, this);"
+  style="width: 1px; min-width: 100%; border: 0"
+  src="{finder URL}"
+></iframe>
+```
+
+## Development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
