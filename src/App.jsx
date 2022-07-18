@@ -74,7 +74,7 @@ const App = () => {
     // Filter ZIPs
     if (
       filters.ZIP &&
-      filters.ZIP.length > 0 &&
+      filters.ZIP.length >= 0 &&
       (!item._zip || filters.ZIP.indexOf(item._zip) < 0)
     ) {
       return false;
