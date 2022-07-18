@@ -146,17 +146,12 @@ const Filter = (props) => {
             </Dropdown>
           </FormGroup>
           <div className="tablet:grid-col-4">
-            <ul className="usa-button-group flex-align-center">
+            <ul className="usa-button-group margin-top-2 mobile-lg:margin-top-0 flex-align-center flex-row">
               <li className="usa-button-group__item margin-bottom-0 margin-right-1">
                 <Button type="submit">Search</Button>
               </li>
               <li className="usa-button-group__item margin-bottom-0">
-                <Button
-                  type="button"
-                  className="usa-button--base"
-                  unstyled
-                  onClick={handleClear}
-                >
+                <Button type="button" unstyled onClick={handleClear}>
                   Clear search
                 </Button>
               </li>
