@@ -22,7 +22,7 @@ Configure this application by building a URL to use in an `iframe` embed. The UR
 ### Sample embed code
 
 ```html
-<script src="https://beta.nj.gov/global-signup/form/vendor/iframeResizer.min.js"></script>
+<script src="https://innovation.nj.gov/app/finder/vendor/iframe-resizer/iframeResizer.min.js"></script>
 <iframe
   onload="iFrameResize({}, this);"
   style="width: 1px; min-width: 100%; border: 0"

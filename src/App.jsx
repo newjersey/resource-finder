@@ -11,7 +11,10 @@ import Item from "./components/Item.jsx";
 import { Alert, CardGroup, GridContainer } from "@trussworks/react-uswds";
 
 // Path params
-const path = window.location.pathname.split("/").slice(1);
+const path = window.location.pathname
+  .replace("/app/finder", "")
+  .split("/")
+  .slice(1);
 const baseID = path[0];
 const tableID = path[1];
 const viewID = path[2];
