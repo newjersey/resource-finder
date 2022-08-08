@@ -71,10 +71,14 @@ const App = () => {
   }, []);
 
   const filterFunction = (item) => {
+    // Remove nameless records
+    if (!item[nameField]) {
+      return false;
+    }
     // Filter ZIPs
     if (
       filters.ZIP &&
-      filters.ZIP.length >= 0 &&
+      filters.ZIP.length > 0 &&
       (!item._zip || filters.ZIP.indexOf(item._zip) < 0)
     ) {
       return false;
@@ -91,17 +95,6 @@ const App = () => {
   const sortFunction = (a, b) => {
     if (a._distance >= 0 && b._distance >= 0) {
       return a._distance - b._distance;
-    } else {
-      const nameA = a[nameField].toUpperCase();
-      const nameB = b[nameField].toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
     }
   };
 

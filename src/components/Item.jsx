@@ -54,6 +54,12 @@ const Item = (props) => {
                           </Tag>
                         ))
                       ) : field[1] &&
+                        field[1].length === 10 &&
+                        Date.parse(field[1]) ? (
+                        new Date(field[1].split("-")).toLocaleDateString(
+                          "en-US"
+                        )
+                      ) : field[1] &&
                         field[1].length !== 5 &&
                         Date.parse(field[1]) ? (
                         new Date(field[1]).toLocaleDateString("en-US") +

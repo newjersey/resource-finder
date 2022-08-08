@@ -71,6 +71,7 @@ const Filter = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!county && !zipCode) return handleClear(event);
     props.setIsLoaded(false);
     if (!zipCode && !county) {
       props.setFilters({});
