@@ -52,9 +52,13 @@ const App = () => {
       .all()
       .then((result) => {
         result = result.map((x) => {
-          x.fields.County =
-            x.fields["Name (from County)"]?.[0] || x.fields.County;
-          delete x.fields["Name (from County)"];
+          if (
+            x.fields["Name (from County)"] &&
+            x.fields["Name (from County)"][0]
+          ) {
+            x.fields.County = x.fields["Name (from County)"][0];
+            delete x.fields["Name (from County)"];
+          }
           const zipPattern = /\b(:[A-Z]{2}\s+)?(\d{5})(:-\d{4})?\b/;
           x.fields._zip =
             x.fields[locationField] &&
@@ -88,7 +92,8 @@ const App = () => {
     }
     if (
       filters.county &&
-      item[countyField]?.toLowerCase() !== filters.county.toLowerCase()
+      item[countyField] &&
+      item[countyField].toLowerCase() !== filters.county.toLowerCase()
     ) {
       return false;
     }
