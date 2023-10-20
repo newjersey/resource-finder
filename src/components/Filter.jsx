@@ -40,10 +40,22 @@ const counties = [
   "Warren",
 ];
 
+const buildFilterFieldsList = (props) => {
+  if (!props.filterFieldKey) return false;
+  const options = [
+    ...new Set(props.items.map((item) => item[props.filterFieldKey])),
+  ];
+
+  return options;
+};
+
 const Filter = (props) => {
   const [zipCode, setZipCode] = useState("");
   const [county, setCounty] = useState("");
+  const [filterField, setFilterField] = useState("");
   const [zipDistance, setZipDistance] = useState(initialDistance);
+
+  const filterFields = buildFilterFieldsList(props);
 
   const filterZIP = () => {
     const centroid = ZIPS[zipCode];
@@ -71,9 +83,9 @@ const Filter = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!county && !zipCode) return handleClear(event);
+    if (!county && !zipCode && !filterField) return handleClear(event);
     props.setIsLoaded(false);
-    if (!zipCode && !county) {
+    if (!zipCode && !county && !filterField) {
       props.setFilters({});
       clearDistance();
       return false;
@@ -83,6 +95,7 @@ const Filter = (props) => {
         ...prevFilters,
         ZIP: filterZIP(),
         county: county,
+        filterField: filterField,
       }),
       props.setIsLoaded(true)
     );
@@ -93,6 +106,7 @@ const Filter = (props) => {
     setZipCode("");
     setZipDistance(initialDistance);
     setCounty("");
+    setFilterField("");
     clearDistance();
   };
 
@@ -103,6 +117,27 @@ const Filter = (props) => {
     >
       <Fieldset legend="Filters" legendStyle="srOnly">
         <Grid row gap="md" className="flex-align-end">
+          {filterFields ? (
+            <FormGroup className="tablet:grid-col-3">
+              <Label htmlFor="filter-field">Filter</Label>
+              <Dropdown
+                id="filter-field"
+                name="filter-field"
+                onChange={(event) => setFilterField(event.target.value)}
+                value={filterField}
+              >
+                <option value="">- Select -</option>
+                {filterFields.map((filter, index) => (
+                  <option key={filter} value={filter}>
+                    {filter}
+                  </option>
+                ))}
+              </Dropdown>
+            </FormGroup>
+          ) : (
+            ""
+          )}
+
           <FormGroup className="tablet:grid-col-2">
             <Label htmlFor="filter-zip">ZIP Code</Label>
             <TextInput
