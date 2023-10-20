@@ -25,6 +25,7 @@ const locationField = queryParams.get("locationField") || "ZIP";
 const nameField = queryParams.get("nameField") || "Name";
 const linkField = queryParams.get("linkField") || "Link";
 const countyField = queryParams.get("countyField") || "County";
+const filterField = queryParams.get("filterField");
 
 const base = new Airtable({
   apiKey: "unset",
@@ -90,10 +91,19 @@ const App = () => {
     ) {
       return false;
     }
+    // Filter Counties
     if (
       filters.county &&
       item[countyField] &&
       item[countyField].toLowerCase() !== filters.county.toLowerCase()
+    ) {
+      return false;
+    }
+    // Filter filter field
+    if (
+      filters.filterField &&
+      item[filterField] &&
+      item[filterField].toLowerCase() !== filters.filterField.toLowerCase()
     ) {
       return false;
     }
@@ -113,6 +123,7 @@ const App = () => {
       <GridContainer className="App padding-05">
         <Filter
           items={items}
+          filterFieldKey={filterField}
           setFilters={setFilters}
           setIsLoaded={setIsLoaded}
         ></Filter>
