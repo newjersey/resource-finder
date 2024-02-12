@@ -17,6 +17,7 @@ Configure this application by building a URL to use in an `iframe` embed. The UR
   - `linkField` (optional) a fully qualified URL (e.g. https://example.com/path). If present, this will show up as a button that says "Visit site" on the resource card. Defaults to `Link` field; specify through param
   - `filterField` a field that should be used as an additional drop down filter. Specify the field name by setting the `filterField` URL parameter
 - Share the table / view with "read only access" with the user "dave.cole@oit.nj.gov (READ ONLY API)", to allow for public access to the view
+  - **Add the table to the scope for the personal access token associated with the above account**
 - Build an embed URL starting with the URL base `https://innovation.nj.gov/app/finder/`, followed by the Airtable path (copied from the path of the URL when you're looking at the view you want to share in Airtable), e.g. `appzXNd4ovBNZ0ZJb/tblsy2WZggzW1rwD8/viw9MPuhzMteXxi3U`, followed optionally by a `?` and any parameters you want to specify (params should be in the format of `?key=value&key2=value2&key3=value3`), e.g. `?locationField=Address&linkField=Link`
 - Use this URL as the `src` of an `iframe` tag to embed it on a webpage
 
