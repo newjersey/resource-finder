@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Airtable from "airtable";
 import ZIPS from "./zipCodes.js";
 import "iframe-resizer/js/iframeResizer.contentWindow";
+import parsePhoneNumber from "libphonenumber-js";
 
 import "@trussworks/react-uswds/lib/index.css";
 import "./App.css";
@@ -67,6 +68,18 @@ const App = () => {
             x.fields[locationField].match(zipPattern)[0];
           if (x.fields._zip) x.fields._centroid = ZIPS[x.fields._zip];
           x.fields._id = x.id;
+          // Format phone numbers
+          if (x.fields["Phone"]) {
+            try {
+              const phoneNumber = parsePhoneNumber(
+                x.fields["Phone"],
+                "US"
+              )?.formatNational();
+              x.fields["Phone"] = phoneNumber;
+            } catch (e) {
+              // Leave value as is
+            }
+          }
           return x.fields;
         });
         setIsLoaded(true);

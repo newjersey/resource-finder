@@ -12,6 +12,7 @@
     "@turf/distance": "^6.5.0",
     "airtable": "^0.11.4",
     "iframe-resizer": "^4.3.2",
+    "libphonenumber-js": "^1.10.60",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
