@@ -10,7 +10,7 @@ import {
   Label,
   TextInput,
   FormGroup,
-  Dropdown,
+  Select,
   Grid,
 } from "@trussworks/react-uswds";
 
@@ -120,7 +120,7 @@ const Filter = (props) => {
           {filterFields ? (
             <FormGroup className="tablet:grid-col-3">
               <Label htmlFor="filter-field">Filter</Label>
-              <Dropdown
+              <Select
                 id="filter-field"
                 name="filter-field"
                 onChange={(event) => setFilterField(event.target.value)}
@@ -132,7 +132,7 @@ const Filter = (props) => {
                     {filter}
                   </option>
                 ))}
-              </Dropdown>
+              </Select>
             </FormGroup>
           ) : (
             ""
@@ -153,7 +153,7 @@ const Filter = (props) => {
           </FormGroup>
           <FormGroup className="tablet:grid-col-2">
             <Label htmlFor="filter-zip-distance">Distance</Label>
-            <Dropdown
+            <Select
               id="filter-zip-distance"
               name="filter-zip-distance"
               onChange={(event) => setZipDistance(event.target.value)}
@@ -163,11 +163,11 @@ const Filter = (props) => {
               <option value="5">5 miles</option>
               <option value="25">25 miles</option>
               <option value="50">50 miles</option>
-            </Dropdown>
+            </Select>
           </FormGroup>
           <FormGroup className="tablet:grid-col-3">
             <Label htmlFor="filter-county">County</Label>
-            <Dropdown
+            <Select
               id="filter-county"
               name="filter-county"
               onChange={(event) => setCounty(event.target.value)}
@@ -179,7 +179,7 @@ const Filter = (props) => {
                   {county}
                 </option>
               ))}
-            </Dropdown>
+            </Select>
           </FormGroup>
           <div className="tablet:grid-col-4">
             <ul className="usa-button-group margin-top-2 mobile-lg:margin-top-0 flex-align-center flex-row">
